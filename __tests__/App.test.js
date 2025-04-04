@@ -29,3 +29,8 @@ test("should support different delimiters defined in the format //;\n1;2", () =>
   expect(add("//@\n5@10@15")).toBe(30);
 });
 
+test("should throw an exception for negative numbers", () => {
+  expect(() => add("1,-2,3")).toThrow("negative numbers not allowed: -2");
+  expect(() => add("-1,-5,6")).toThrow("negative numbers not allowed: -1,-5");
+});
+
