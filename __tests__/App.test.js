@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { add } from "../src/stringCalculator";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent  } from "@testing-library/react";
 import StringCalculator from "../src/StringCalculatorComp";
 
 test("should return 0 for an empty string", () => {
@@ -44,4 +44,22 @@ test("should render String Calculator component", () => {
     // Check if the heading is in the document
     const heading = screen.getByText(/String Calculator/i);
     expect(heading).toBeInTheDocument();
+});
+
+test("should allow user to input numbers and calculate the sum", () => {
+  render(<StringCalculator />);
+
+  // Get input field and button
+  const input = screen.getByPlaceholderText("Enter numbers (e.g., 1,2,3)");
+  const button = screen.getByText("Calculate");
+
+  // Simulate user typing numbers
+  fireEvent.change(input, { target: { value: "1,2,3" } });
+
+  // Simulate button click
+  fireEvent.click(button);
+
+  // Expect result to be displayed
+  const result = screen.getByText(/Result:/i);
+  expect(result).toHaveTextContent("Result: 6"); // Fails because function isn’t implemented yet
 });
