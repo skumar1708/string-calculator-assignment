@@ -1,7 +1,8 @@
 import React from "react";
+import "@testing-library/jest-dom";
 import { add } from "../src/stringCalculator";
 import { render, screen } from "@testing-library/react";
-import StringCalculator from "./StringCalculator";
+import StringCalculator from "../src/StringCalculatorComp";
 
 test("should return 0 for an empty string", () => {
     expect(add("")).toBe(0);
