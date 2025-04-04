@@ -23,3 +23,9 @@ test("should handle new lines as delimiters", () => {
   expect(add("10\n20\n30")).toBe(60);
 });
 
+test("should support different delimiters defined in the format //;\n1;2", () => {
+  expect(add("//;\n1;2")).toBe(3);
+  expect(add("//#\n2#3#4")).toBe(9);
+  expect(add("//@\n5@10@15")).toBe(30);
+});
+
