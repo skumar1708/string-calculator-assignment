@@ -1,4 +1,7 @@
+import React from "react";
 import { add } from "../src/stringCalculator";
+import { render, screen } from "@testing-library/react";
+import StringCalculator from "./StringCalculator";
 
 test("should return 0 for an empty string", () => {
     expect(add("")).toBe(0);
@@ -34,3 +37,10 @@ test("should throw an exception for negative numbers", () => {
   expect(() => add("-1,-5,6")).toThrow("negative numbers not allowed: -1,-5");
 });
 
+test("should render String Calculator component", () => {
+    render(<StringCalculator />);
+    
+    // Check if the heading is in the document
+    const heading = screen.getByText(/String Calculator/i);
+    expect(heading).toBeInTheDocument();
+});
