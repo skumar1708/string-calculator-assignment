@@ -12,3 +12,9 @@ test("should return the number itself when a single number is passed", () => {
 test("should return the sum of two numbers", () => {
   expect(add("1,5")).toBe(6);
 });
+
+test("should return the sum of multiple numbers", () => {
+  expect(add("1,2,3,4")).toBe(10);
+  expect(add("10,20,30")).toBe(60);
+});
+
