@@ -63,3 +63,21 @@ test("should allow user to input numbers and calculate the sum", () => {
   const result = screen.getByText(/Result:/i);
   expect(result).toHaveTextContent("Result: 6"); // Fails because function isn’t implemented yet
 });
+
+test("should display an error message when negative numbers are entered", () => {
+  render(<StringCalculator />);
+
+  // Get input field and button
+  const input = screen.getByPlaceholderText("Enter numbers (e.g., 1,2,3)");
+  const button = screen.getByText("Calculate");
+
+  // Simulate user entering negative numbers
+  fireEvent.change(input, { target: { value: "1,-2,3" } });
+
+  // Simulate button click
+  fireEvent.click(button);
+
+  // Expect error message to be displayed
+  const errorMessage = screen.getByText(/negative numbers not allowed: -2/i);
+  expect(errorMessage).toBeInTheDocument();
+});
